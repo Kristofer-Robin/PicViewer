@@ -42,6 +42,7 @@ document.getElementById('submitForm').addEventListener('submit', function(event)
       });
 });
 
+
 const levels = {
   5: "Sr Assistant",
   10: "Jr Honoror",
