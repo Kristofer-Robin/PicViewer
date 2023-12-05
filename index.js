@@ -5,6 +5,44 @@ const context = canvas.getContext("2d");
 const sanxDimensions = { width: 353 * 1.2, height: 325 * 1.2 };
 
 
+document.getElementById('submitBtn').addEventListener('click', function() {
+  document.getElementById('submitForm').style.display = 'block';
+  document.getElementById('watchTime').value = document.querySelector('.seconds').innerText; // Set the watched time in the hidden input
+});
+
+document.getElementById('submitForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  const name = event.target.elements.name.value;
+  const watchTime = event.target.elements.watchTime.value;
+
+  fetch('/submit-time', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: name,
+      watchedTime: parseInt(watchTime, 10),
+    }),
+  })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then(data => {
+        alert('Time submitted successfully');
+        document.getElementById('submitForm').style.display = 'none'; // Hide the form again
+        fetchLeaderboardData(); // Refresh the leaderboard
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+});
+
+
 const levels = {
   5: "Sr Assistant",
   10: "Jr Honoror",
