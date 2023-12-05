@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Sanx</title>
+  <meta
+  name="description"
+  content="Watch Sanx be Sanx."/>
+
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+
+    .timer {
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: monospace;
+      width: 250px;
+      text-align: center;
+    }
+
+    .inner {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+    }
+
+    .timer span {
+      font-weight: bold;
+    }
+
+    @media  screen and  (min-width: 600px)  {
+      .timer {
+        width: 500px;
+      }
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* Existing styles ... */
+
+    /* Layout the main content and leaderboard side by side */
+    body {
+      display: flex;
+      justify-content: space-between; /* This separates the two main sections */
+    }
+
+    /* Styles for the leaderboard container */
+    #leaderboardContainer {
+      width: 20%; /* Adjust the width as needed */
+      margin-right: 10px; /* Add some margin on the right */
+      background: rgba(255, 255, 255, 0.8); /* Optional: Make it stand out */
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add some shadow for depth */
+      height: 100vh; /* Make it full height */
+      overflow-y: auto; /* Add scroll if content is too long */
+    }
+
+    /* Responsive adjustments */
+    @media screen and (max-width: 600px) {
+      body {
+        flex-direction: column;
+      }
+      #leaderboardContainer {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <canvas></canvas>
+  <div class="timer frame">
+    <div class="inner">You have been honoring the Sanx for <span class="seconds">0</span> seconds<br/>
+    You are a <span class="grade">Assistant</span> of Sanx</div>
+    <button id="submitBtn">Submit Time</button> <!-- Button moved here -->
+    <form id="submitForm" style="display:none;">
+      <input type="text" name="name" placeholder="Your Name">
+      <input type="hidden" name="watchTime" id="watchTime">
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <!-- Add a container for the leaderboard -->
+  <div id="leaderboardContainer">
+    <h2>Leaderboard</h2>
+    <table id="timesTable">
+      <tr>
+        <th>Name</th>
+        <th>Watch Time</th>
+      </tr>
+      <!-- Leaderboard entries will be inserted here -->
+    </table>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+</html>
