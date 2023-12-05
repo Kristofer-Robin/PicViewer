@@ -25,6 +25,7 @@ const PlayerTime = sequelize.define('player_time', {
     timestamps: false // Disable the automatic creation of createdAt & updatedAt fields
 });
 
+
 // Sync the model with the database
 PlayerTime.sync();
 
