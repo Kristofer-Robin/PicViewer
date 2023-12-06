@@ -1,12 +1,33 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const Sequelize = require('sequelize');
 const app = express();
 const port = 3000;
 
-// Database connection setup
+
 const sequelize = new Sequelize('mysql://root:qwerty@localhost:3306/leaderboard', {
     dialect: 'mysql'
+});
+
+app.use(cors()); // Enable CORS
+app.use(express.json()); // Enable JSON body parsing
+
+// Serve static files from the 'assets' directory
+app.use(express.static('assets'));
+
+// Endpoint to get leaderboard scores
+app.get('/api/leaderboard', async (req, res) => {
+    try {
+        const scores = await Score.findAll({
+            order: [['score', 'DESC']],
+            limit: 10
+        });
+        res.json(scores);
+    } catch (error) {
+        console.error('Error fetching leaderboard:', error);
+        res.status(500).send({ error: error.message });
+    }
 });
 
 // Model definition for the leaderboard

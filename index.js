@@ -35,7 +35,7 @@ document.getElementById('submitForm').addEventListener('submit', function(event)
       .then(data => {
         alert('Time submitted successfully');
         document.getElementById('submitForm').style.display = 'none'; // Hide the form again
-        fetchLeaderboardData(); // Refresh the leaderboard
+        window.location.href = 'results.html'; // Redirect to results.html
       })
       .catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
