@@ -3,24 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top 10 Times</title>
+  <title>Top Times</title>
   <script>
-
     document.addEventListener('DOMContentLoaded', function() {
-      fetch('http://localhost:3000/top-scores') // Replace with your actual backend URL
+      fetch('http://localhost:3000/times') // Replace with your actual backend URL
               .then(response => response.json())
               .then(scores => {
-                const list = document.getElementById('score-list');
-                scores.forEach((score, index) => {
-                  const li = document.createElement('li');
-                  li.textContent = `${index + 1}. ${score.player} - ${score.score}`;
-                  list.appendChild(li);
+                const table = document.querySelector('.leaderboard table');
+                // Clear existing data rows
+                while (table.rows.length > 1) {
+                  table.deleteRow(1);
+                }
+                // Append new rows with the top 10 scores
+                scores.forEach(score => {
+                  let row = table.insertRow();
+                  let nameCell = row.insertCell(0);
+                  let timeCell = row.insertCell(1);
+                  nameCell.textContent = score.name;
+
+                  // Convert time to mm:ss format
+                  let minutes = Math.floor(score.watchedTime / 60);
+                  let seconds = score.watchedTime % 60;
+                  timeCell.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
                 });
               })
               .catch(err => console.error('Error fetching scores:', err));
     });
 
   </script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -61,26 +72,13 @@
 <body>
 
 <div class="leaderboard">
-  <h1>Top 10 Times</h1>
+  <h1>&#x1F451; Top Times &#x1F451;</h1>
   <table>
     <tr>
       <th>Name</th>
       <th>Time</th>
     </tr>
-    <tr>
-      <td>Player 1</td>
-      <td>1:30</td>
-    </tr>
-    <tr>
-      <td>Player 2</td>
-      <td>2:15</td>
-    </tr>
-    <tr>
-      <td>Player 3</td>
-      <td>2:45</td>
-    </tr>
-    <!-- Add more rows for additional leaderboard entries -->
-  </table>
+</table>
 </div>
 
 <ul id="score-list">
