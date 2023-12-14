@@ -67,6 +67,24 @@
     tr:hover {
       background-color: #ddd;
     }
+
+    #backButton {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #333;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #backButton:hover {
+      background-color: #555;
+    }
+
   </style>
 </head>
 <body>
@@ -84,5 +102,15 @@
 <ul id="score-list">
   <!-- Scores will be added here -->
 </ul>
+
+<button id="backButton">Back to Main Page</button>
+
+
+
+<script>
+  document.getElementById('backButton').addEventListener('click', function() {
+    window.location.href = 'index.html';
+  });
+</script>
 </body>
 </html>

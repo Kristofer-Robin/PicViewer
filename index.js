@@ -3,12 +3,18 @@ const secondsCount = document.querySelector(".seconds");
 const level = document.querySelector(".grade");
 const context = canvas.getContext("2d");
 const sanxDimensions = { width: 353 * 1.2, height: 325 * 1.2 };
+let animationFrameId;
 
 
 document.getElementById('submitBtn').addEventListener('click', function() {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId); // Stop the loop
+    this.style.display = 'none';  // hide the submit button
+  }
   document.getElementById('submitForm').style.display = 'block';
-  document.getElementById('watchTime').value = document.querySelector('.seconds').innerText; // Set the watched time in the hidden input
+  document.getElementById('watchTime').value = document.querySelector('.seconds').innerText;
 });
+
 
 document.getElementById('submitForm').addEventListener('submit', function(event) {
   event.preventDefault(); // Prevent the default form submission
@@ -44,24 +50,24 @@ document.getElementById('submitForm').addEventListener('submit', function(event)
 
 
 const levels = {
-  5: "Sr Assistant",
-  10: "Jr Honoror",
-  15: "Master Honoror",
-  35: "S Tier Honoror",
-  65: "Junior Acolyte",
-  105: "Acolyte",
-  150: "Senior Acolyte",
-  250: "Priest",
-  450: "Sage",
-  650: "Hermit",
-  1000: "Senior Hermit",
-  1500: "CEO",
-  2500: "Pope",
-  3500: "Underlord",
-  4500: "Lord",
-  10500: "OverLord",
-  20500: "King",
-  30500: "Anunnaki"
+  5: "Newbie",
+  10: "Plebeian",
+  15: "Admirer",
+  35: "Master admirer",
+  65: "Junior senior",
+  105: "Senior",
+  150: "Senior senior",
+  250: "Külmkapp",
+  450: "Käsisaag",
+  650: "Zygomite",
+  1000: "Senior Zygomite",
+  1500: "Rune 2h",
+  2500: "Dragon 2h",
+  3500: "Dragon slayer",
+  4500: "Right hand man",
+  10500: "Lvl 99 admirer",
+  20500: "Lvl 120 admirer",
+  30500: "Owner"
 }
 
 const startTime = Date.now();
@@ -147,7 +153,7 @@ function loopDraw() {
     level.innerText = levels[newTime]
   }
 
-  requestAnimationFrame(loopDraw);
+  animationFrameId = requestAnimationFrame(loopDraw);
 }
 
 function startLooping() {
@@ -168,7 +174,6 @@ function fetchLeaderboardData() {
 // Call the function to fetch and display data
 fetchLeaderboardData();
 
-// ... existing code ...
 
 // Call this function to fetch and display leaderboard data
 fetchLeaderboardData();
