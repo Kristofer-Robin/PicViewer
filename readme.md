@@ -33,7 +33,9 @@
   </li>
   <li><strong>Install Dependencies</strong>
     <pre><code>cd Picviewer
-npm install</code></pre>
+npm install
+npm install express sequelize mysql2 cors
+</code></pre>
   </li>
   <li><strong>Database Configuration</strong>
     <ul>
